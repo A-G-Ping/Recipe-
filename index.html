@@ -35,11 +35,7 @@
             --toggle-knob: #F0EDE8;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -89,9 +85,7 @@
             font-size: 12px;
         }
 
-        [data-theme="dark"] .theme-toggle .knob {
-            transform: translateX(22px);
-        }
+        [data-theme="dark"] .theme-toggle .knob { transform: translateX(22px); }
 
         header h1 {
             font-family: 'Playfair Display', serif;
@@ -278,9 +272,7 @@
             padding: 1rem;
         }
 
-        .modal.open {
-            display: flex;
-        }
+        .modal.open { display: flex; }
 
         .modal-content {
             background: var(--surface-card);
@@ -349,9 +341,7 @@
             margin-bottom: 1rem;
         }
 
-        .modal-content li {
-            margin-bottom: 0.5rem;
-        }
+        .modal-content li { margin-bottom: 0.5rem; }
 
         .kitchen-note {
             background: var(--bg-parchment);
@@ -422,8 +412,18 @@
         Master Recipe Cookbook &bull; Dedicated Portrait Edition &bull; All 131 Family Heirlooms Preserved
     </footer>
 
-    <script src="recipes.js"></script>
+    <script src="recipes-part1.js"></script>
+    <script src="recipes-part2.js"></script>
+    <script src="recipes-part3.js"></script>
+    <script src="recipes-part4.js"></script>
     <script>
+        const recipes = [
+            ...(typeof recipesPart1 !== 'undefined' ? recipesPart1 : []),
+            ...(typeof recipesPart2 !== 'undefined' ? recipesPart2 : []),
+            ...(typeof recipesPart3 !== 'undefined' ? recipesPart3 : []),
+            ...(typeof recipesPart4 !== 'undefined' ? recipesPart4 : [])
+        ];
+
         let currentCategory = 'All';
 
         function renderRecipes(recipesToRender) {
@@ -499,7 +499,6 @@
             if (event.target.id === 'recipeModal') closeModal();
         }
 
-        // Dark mode toggle
         const themeToggle = document.getElementById('themeToggle');
         const themeKnob = document.getElementById('themeKnob');
         const html = document.documentElement;
@@ -524,12 +523,7 @@
             }
         });
 
-        // Wait for recipes.js to load
-        if (typeof recipes !== 'undefined') {
-            renderRecipes(recipes);
-        } else {
-            window.addEventListener('load', () => renderRecipes(recipes));
-        }
+        renderRecipes(recipes);
     </script>
 </body>
 </html>
