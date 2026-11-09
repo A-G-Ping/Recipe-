@@ -422,11 +422,8 @@
         Master Recipe Cookbook &bull; Dedicated Portrait Edition &bull; All 131 Family Heirlooms Preserved
     </footer>
 
+    <script src="recipes.js"></script>
     <script>
-        // The full recipes array (all 131) is included in the complete local file.
-        // For this upload, the structure is correct; the complete data is in the sandbox file.
-        const recipes = []; // Full array from local file
-
         let currentCategory = 'All';
 
         function renderRecipes(recipesToRender) {
@@ -527,7 +524,12 @@
             }
         });
 
-        renderRecipes(recipes);
+        // Wait for recipes.js to load
+        if (typeof recipes !== 'undefined') {
+            renderRecipes(recipes);
+        } else {
+            window.addEventListener('load', () => renderRecipes(recipes));
+        }
     </script>
 </body>
 </html>
