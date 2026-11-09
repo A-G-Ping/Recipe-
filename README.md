@@ -10,6 +10,14 @@ A beautiful, searchable, interactive digital cookbook preserving 131 cherished f
 - 📱 Fully responsive design
 - 📖 Full recipe details in elegant modal view (ingredients, directions, kitchen notes)
 - 🎨 Warm parchment aesthetic with classic typography
+- 🌙 **Dark mode toggle** (sun/moon button in the top-right corner)
+
+## Dark Mode
+A dark mode toggle is available in the top-right of the header.
+
+- Click the **sun ☀️ / moon 🌙** button to switch themes
+- Your preference is automatically saved in the browser (localStorage)
+- On first visit it also respects your system dark/light preference
 
 ## Live Site
 Once GitHub Pages is enabled, the cookbook will be available at:
