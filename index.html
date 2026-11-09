@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Recipe Cookbook — Exhaustive Family & Wanda Ping Edition</title>
+    <title>Master Recipe Cookbook — Exhaustive Family Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -372,6 +372,30 @@
             background: var(--surface-card);
             margin-top: auto;
         }
+
+        .recipe-card.completed {
+            opacity: 0.65;
+        }
+        .recipe-card.completed .recipe-title {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+        .complete-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            user-select: none;
+        }
+        .complete-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -381,7 +405,7 @@
             <span class="knob" id="themeKnob">☀️</span>
         </button>
         <h1>Master Recipe Cookbook</h1>
-        <p>Exhaustive Family Heirlooms & Wanda Ping Edition — All 131 Recipes</p>
+        <p>Exhaustive Family Heirlooms — All 131 Recipes</p>
     </header>
 
     <div class="container">
@@ -419,7 +443,7 @@
     </div>
 
     <footer>
-        Master Recipe Cookbook &bull; Dedicated Portrait Edition &bull; All 131 Family Heirlooms Preserved
+        Master Recipe Cookbook &bull; Family Heirloom Edition &bull; All 131 Family Heirlooms Preserved
     </footer>
 
     <script>
@@ -557,6 +581,21 @@
             { id: 136, title: "Greene Salad", category: "Salads", page: 136, time: "15m + chilling", ingredients: ["1 Yellow Bell Pepper", "1 Orange Bell Pepper", "1 container cherry or grape tomatoes", "2 cucumbers", "1 lb mesquite turkey", "Fresh lemons"], directions: ["Cut bell peppers into strips; rinse with water when done[span_467](start_span)[span_467](end_span).", "Rinse tomatoes with water, peel and slice cucumbers, cut turkey breast into almost-diced pieces[span_468](start_span)[span_468](end_span).", "Add all contents into a mixing bowl; toss to combine and refrigerate for about one hour[span_469](start_span)[span_469](end_span).", "When serving, cut a fresh lemon and use as dressing—about half a lemon per bowl[span_470](start_span)[span_470](end_span)."], note: "A bright, fresh family salad with fresh lemon squeezed tableside[span_471](start_span)[span_471](end_span)." }
         ];
 
+        
+        // Completed recipes (persisted)
+        let completedRecipes = new Set(JSON.parse(localStorage.getItem('completedRecipes') || '[]'));
+
+        function toggleComplete(id, checked) {
+            if (checked) {
+                completedRecipes.add(id);
+            } else {
+                completedRecipes.delete(id);
+            }
+            localStorage.setItem('completedRecipes', JSON.stringify([...completedRecipes]));
+            // Re-render to update styles
+            filterRecipes();
+        }
+
         let currentCategory = 'All';
 
         function renderRecipes(recipesToRender) {
@@ -566,6 +605,8 @@
             recipesToRender.forEach(r => {
                 const card = document.createElement('div');
                 card.className = 'recipe-card';
+                const isCompleted = completedRecipes.has(r.id);
+                if (isCompleted) card.classList.add('completed');
                 card.innerHTML = `
                     <div>
                         <div class="recipe-header">
@@ -577,6 +618,10 @@
                             <p><strong>Time/Bake:</strong> ${r.time || r.oven || 'Standard'}</p>
                             <p><strong>Ingredients:</strong> ${r.ingredients.length} items listed</p>
                         </div>
+                        <label class="complete-row" onclick="event.stopPropagation()">
+                            <input type="checkbox" ${isCompleted ? 'checked' : ''} onchange="toggleComplete(${r.id}, this.checked)">
+                            <span>Mark as completed</span>
+                        </label>
                     </div>
                     <button class="view-btn" onclick="openRecipe(${r.id})">View Full Recipe</button>
                 `;
