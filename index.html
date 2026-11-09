@@ -169,8 +169,8 @@
             type="text" 
             id="search-input"
             oninput="handleSearch(this.value)"
-            placeholder="Search by recipe title, ingredient (e.g. green chile, pecans, buttermilk)..." 
-            class="w-full pl-12 pr-10 py-3.5 rounded-2xl bg-white border border-parchment-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 text-sm sm:text-base text-parchment-900 placeholder-parchment-400"
+            placeholder="Search recipes or ingredients..." 
+            class="w-full pl-11 pr-10 py-3 sm:py-3.5 rounded-2xl bg-white border border-parchment-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 text-sm sm:text-base text-parchment-900 placeholder-parchment-400"
           >
           <button id="clear-search-btn" onclick="clearSearch()" class="absolute right-3.5 p-1 text-parchment-400 hover:text-parchment-800 hidden">
             <i data-lucide="x" class="w-4 h-4"></i>
@@ -4924,19 +4924,19 @@
 
     // CATEGORIES LIST
     const CATEGORIES = [
-      "All Recipes",
-      "Cakes & Baking Foundations",
-      "Breakfast & Morning Table",
-      "Appetizers & Starters",
-      "Soups & Dumplings",
-      "Cold Salads",
-      "Colorado & Tex-Mex Classics",
-      "Poultry Mains & Casseroles",
-      "Beef, Pork & Seafood",
-      "Italian & Pasta",
-      "Casseroles, Sides & Sauces",
-      "Holiday Turkey & Trimmings",
-      "Desserts, Cookies & Confections"
+          "All Recipes",
+          "Appetizers",
+          "Beef, Pork & Seafood",
+          "Breakfast & Morning",
+          "Cakes & Baking",
+          "Casseroles & Sides",
+          "Colorado & Tex-Mex",
+          "Desserts & Candies",
+          "Holiday Turkey",
+          "Italian & Pasta",
+          "Poultry Mains",
+          "Salads",
+          "Soups"
     ];
 
     // APPLICATION STATE
